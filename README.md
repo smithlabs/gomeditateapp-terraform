@@ -38,8 +38,8 @@ This project will deploy the [gomeditateapp-docker](https://github.com/smithlabs
 
 💡 Below are links to the examples included in this repo.
 
-- [Docker Build Example](https://github.com/smithlabs/hello-world-terraform-go-demo/tree/main/examples/complete) - Deploy the application by building the container from scratch using the [Dockerfile](https://github.com/smithlabs/gomeditateapp/blob/main/Dockerfile).
-- [Docker Hub Example](https://github.com/smithlabs/hello-world-terraform-go-demo/tree/main/examples/complete) - Deploy the application by using the pre-built container from my [Dockerhub](https://hub.docker.com/repository/docker/smithlabs/gomeditateapp). 
+- [Docker Build Example](https://github.com/smithlabs/gomeditateapp-terraform/tree/main/examples/dockerbuild) - Deploy the application by building the container from scratch using the [Dockerfile](https://github.com/smithlabs/gomeditateapp-docker/blob/main/Dockerfile).
+- [Docker Hub Example](https://github.com/smithlabs/gomeditateapp-terraform/tree/main/examples/dockerhub) - Deploy the application by using the pre-built container from my [Dockerhub](https://hub.docker.com/repository/docker/smithlabs/gomeditateapp). 
 
 Note: The `main.tf` in the project root uses the Dockerhub container for the deploy.
 
