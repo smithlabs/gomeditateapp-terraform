@@ -23,12 +23,12 @@ func TestHelloWorldAppExample(t *testing.T)  {
 	terraform.InitAndApply(t, opts)
 
 	elbDnsName := terraform.OutputRequired(t, opts, "elb_dns_name")
-	url := fmt.Sprintf("http://%s", elbDnsName)
+	url := fmt.Sprintf("http://%s/health", elbDnsName)
 
 	expectedStatus := 200
 	expectedBody := "Online!"
 
-	maxRetries := 50
+	maxRetries := 20
 	timeBetweenRetries := 10 * time.Second
 
 	// Setup a TLS configuration to submit with the helper, a blank struct is acceptable
