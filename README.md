@@ -27,7 +27,7 @@ This folder contains the full [Terraform](https://www.terraform.io/) configurati
 
 ## 🔭 Overview
 
-This project will deploy the [gomeditateapp-docker](https://github.com/smithlabs/gomeditateapp-docker) project using the ``smithlabs/gomeditateapp:1.0`` container image from my [DockerHub](https://hub.docker.com/repository/docker/smithlabs/gomeditateapp). The following [AWS](https://aws.amazon.com/) resources are created.
+This project will deploy the [gomeditateapp-docker](https://github.com/smithlabs/gomeditateapp-docker) project using the ``smithlabs/gomeditateapp:1.0.0`` container image from my [DockerHub](https://hub.docker.com/repository/docker/smithlabs/gomeditateapp). The following [AWS](https://aws.amazon.com/) resources are created.
 
 - [Elastic Load Balancer](https://aws.amazon.com/elasticloadbalancing/) (Also known as the [Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/introduction.html))
 - [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)

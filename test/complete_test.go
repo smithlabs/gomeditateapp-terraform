@@ -14,9 +14,8 @@ func TestHelloWorldAppExample(t *testing.T)  {
 	t.Parallel()
 
 	opts := &terraform.Options{
-		// You should update this relative path to point at your
-		// hello-world-app example directory!
-		TerraformDir: "../examples/complete",
+		// Run the test using the DockerHub example
+		TerraformDir: "../examples/dockerhub",
 	}
 
 	// Clean up everything at the end of the test
@@ -27,7 +26,7 @@ func TestHelloWorldAppExample(t *testing.T)  {
 	url := fmt.Sprintf("http://%s", elbDnsName)
 
 	expectedStatus := 200
-	expectedBody := "Hello, world!"
+	expectedBody := "Online!"
 
 	maxRetries := 50
 	timeBetweenRetries := 10 * time.Second
