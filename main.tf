@@ -116,3 +116,35 @@ data "aws_vpc" "default" {
 data "aws_subnet_ids" "default" {
   vpc_id = data.aws_vpc.default.id
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# ROUTE53
+# ---------------------------------------------------------------------------------------------------------------------
+
+data "aws_route53_zone" "selected" {
+    name        =    "gomeditateapp.com."
+  }
+
+  resource "aws_route53_record" "main" {
+    zone_id = data.aws_route53_zone.selected.zone_id
+    name    = "gomeditateapp.com"
+    type    = "A"
+
+    alias {
+      name                   = module.elb.elb_dns_name
+      zone_id                = module.elb.elb_zone_id
+      evaluate_target_health = false
+    }
+  }
+
+  resource "aws_route53_record" "www" {
+    zone_id = data.aws_route53_zone.selected.zone_id
+    name    = "www.gomeditateapp.com"
+    type    = "A"
+
+    alias {
+      name                   = module.elb.elb_dns_name
+      zone_id                = module.elb.elb_zone_id
+      evaluate_target_health = false
+    }
+  }
