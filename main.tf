@@ -148,3 +148,47 @@ data "aws_route53_zone" "selected" {
       evaluate_target_health = false
     }
   }
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# DEV RECORD WITH ACM
+# ---------------------------------------------------------------------------------------------------------------------
+
+resource "aws_acm_certificate" "selected" {
+  domain_name        = "dev.gomeditateapp.com"
+  validation_method = "DNS"
+}
+
+resource "aws_route53_record" "dev" {
+  for_each = {
+        for dvo in aws_acm_certificate.selected.domain_validation_options : dvo.domain_name => {
+          name          = dvo.resource_record_name
+          record        = dvo.resource_record_value
+          type          = dvo.resource_record_type
+        }
+}
+
+ allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 60
+  type            = each.value.type
+  zone_id         = data.aws_route53_zone.selected.zone_id
+}
+
+resource "aws_acm_certificate_validation" "cert" {
+  certificate_arn         = aws_acm_certificate.selected.arn
+  validation_record_fqdns = [for record in aws_route53_record.dev : record.fqdn]
+}
+
+resource "aws_route53_record" "site" {
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name    = "dev.gomeditateapp.com"
+  type    = "A"
+
+  alias {
+    name                   = module.elb.elb_dns_name
+    zone_id                = module.elb.elb_zone_id
+    evaluate_target_health = false
+  }
+}
