@@ -20,10 +20,10 @@ provider "aws" {
 # These are my custom Terraform modules and they should be pinned to v1.0.0.0.
 # ---------------------------------------------------------------------------------------------------------------------
 
-module "elb" {
-  source = "github.com/smithlabs/terraform-aws-elb?ref=v1.0.0"
+module "alb" {
+  source = "github.com/smithlabs/terraform-aws-alb?ref=v0.0.2"
 
-  elb_name   = var.name
+  alb_name   = var.name
   subnet_ids = data.aws_subnet_ids.default.ids
 }
 
@@ -38,7 +38,7 @@ module "asg" {
   min_size       = 2
   max_size       = 2
   subnet_ids     = data.aws_subnet_ids.default.ids
-  load_balancers = [module.elb.elb_name]
+  load_balancers = [module.alb.alb_name]
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -46,9 +46,9 @@ module "asg" {
 # Allow traffic from the outside world to reach the web application
 # ---------------------------------------------------------------------------------------------------------------------
 
-resource "aws_security_group_rule" "allow_elb_http_inbound" {
+resource "aws_security_group_rule" "allow_alb_http_inbound" {
   type              = "ingress"
-  security_group_id = module.elb.elb_security_group_id
+  security_group_id = module.alb.alb_security_group_id
 
   from_port   = local.http_port
   to_port     = local.http_port
@@ -56,9 +56,9 @@ resource "aws_security_group_rule" "allow_elb_http_inbound" {
   cidr_blocks = local.all_ips
 }
 
-resource "aws_security_group_rule" "allow_elb_all_outbound" {
+resource "aws_security_group_rule" "allow_alb_all_outbound" {
   type              = "egress"
-  security_group_id = module.elb.elb_security_group_id
+  security_group_id = module.alb.alb_security_group_id
 
   from_port   = local.any_port
   to_port     = local.any_port
