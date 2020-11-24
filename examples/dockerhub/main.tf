@@ -38,7 +38,7 @@ module "asg" {
   min_size       = 2
   max_size       = 2
   subnet_ids     = data.aws_subnet_ids.default.ids
-  load_balancers = [module.alb.alb_name]
+  load_balancers = [module.alb.alb_backend]
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
