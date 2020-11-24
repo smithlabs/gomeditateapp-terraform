@@ -46,6 +46,7 @@ module "asg" {
 # Allow traffic from the outside world to reach the web application
 # ---------------------------------------------------------------------------------------------------------------------
 
+# Allow HTTP/80 -- This will automatically get redirected to HTTPS/443 
 resource "aws_security_group_rule" "allow_alb_http_inbound" {
   type              = "ingress"
   security_group_id = module.alb.alb_security_group_id
@@ -56,6 +57,18 @@ resource "aws_security_group_rule" "allow_alb_http_inbound" {
   cidr_blocks = local.all_ips
 }
 
+# Allow HTTPS/443
+resource "aws_security_group_rule" "allow_alb_https_inbound" {
+  type              = "ingress"
+  security_group_id = module.alb.alb_security_group_id
+
+  from_port   = local.https_port
+  to_port     = local.https_port
+  protocol    = local.tcp_protocol
+  cidr_blocks = local.all_ips
+}
+
+# Allow traffic to leave the ALB
 resource "aws_security_group_rule" "allow_alb_all_outbound" {
   type              = "egress"
   security_group_id = module.alb.alb_security_group_id
@@ -99,6 +112,7 @@ resource "aws_security_group_rule" "allow_server_all_outbound" {
 
 locals {
   http_port    = 80
+  https_port   = 443
   any_port     = 0
   any_protocol = "-1"
   tcp_protocol = "tcp"
