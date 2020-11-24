@@ -21,7 +21,7 @@ provider "aws" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "alb" {
-  source = "github.com/smithlabs/terraform-aws-alb?ref=v0.0.2"
+  source = "github.com/smithlabs/terraform-aws-alb?ref=v0.0.4"
 
   alb_name   = var.name
   subnet_ids = data.aws_subnet_ids.default.ids
