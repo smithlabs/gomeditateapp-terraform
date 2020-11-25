@@ -41,6 +41,14 @@ module "asg" {
   target_group_arns = [module.alb.alb_backend]
 }
 
+module "route53" {
+  source = "github.com/smithlabs/terraform-aws-route53?ref=v0.0.1"
+
+  domain_name        = var.domain_name
+  load_balancer_name = module.alb.alb_dns_name
+  zone_id            = module.alb.alb_zone_id
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # ELB SECURITY GROUP RULES
 # Allow traffic from the outside world to reach the web application
