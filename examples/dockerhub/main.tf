@@ -21,7 +21,7 @@ provider "aws" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "alb" {
-  source = "github.com/smithlabs/terraform-aws-alb?ref=v0.0.6"
+  source = "github.com/smithlabs/terraform-aws-alb?ref=v0.0.7"
 
   acm_arn    = module.acm.acm_arn
   alb_name   = var.name
