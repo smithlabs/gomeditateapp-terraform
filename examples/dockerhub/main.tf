@@ -49,6 +49,12 @@ module "route53" {
   zone_id            = module.alb.alb_zone_id
 }
 
+module "acm" {
+  source = "github.com/smithlabs/terraform-aws-acm?ref=v0.0.1"
+
+  domain_name            = var.domain_name
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # ELB SECURITY GROUP RULES
 # Allow traffic from the outside world to reach the web application
