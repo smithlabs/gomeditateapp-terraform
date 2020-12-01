@@ -32,12 +32,12 @@ module "asg" {
   source = "github.com/smithlabs/terraform-aws-asg-rolling-deploy?ref=v1.0.1"
 
   ami               = "ami-02354e95b39ca8dec" # Amazon Linux
-  instance_type     = "t2.micro"
+  instance_type     = "t2.nano"
   name              = var.name
   environment       = var.environment
   user_data         = data.template_file.user_data.rendered
-  min_size          = 2
-  max_size          = 2
+  min_size          = 1
+  max_size          = 1
   subnet_ids        = data.aws_subnet_ids.default.ids
   target_group_arns = [module.alb.alb_backend]
 }
