@@ -8,7 +8,7 @@ Deployed as a [Dockerized](https://www.docker.com/), clustered, [Auto Scaling](h
 
 **Links**
 
-View the [web application](http://gma-dockerhub-162650346.us-east-1.elb.amazonaws.com/) deployed to AWS.
+View the [web application](https://gomeditateapp.com) deployed to AWS.
 
 View the [smithlabs/gomeditateapp-docker](https://github.com/smithlabs/gomeditateapp-docker) GitHub repo contains the source code for the application.
 
