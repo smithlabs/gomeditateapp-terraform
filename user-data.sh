@@ -18,4 +18,4 @@ sudo usermod -a -G docker ec2-user
 
 # Run the docker container in detached mode and map port 8080 on the host to 8080 in the container
 # This is required so it can be accessed by a browser or external load balancer/reverse proxy.
-sudo docker run --restart=always --name app -d -p 8080:8080 smithlabs/gomeditateapp:1.0.0
+sudo docker run --restart=always --name app -d -p 8080:8080 smithlabs/gomeditateapp:1.0.2
