@@ -17,7 +17,7 @@ provider "aws" {
 
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULES
-# These are my custom Terraform modules and they should be pinned to v1.0.0.0.
+# These are my custom Terraform modules and they should be pinned to v1.0.0
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "elb" {
